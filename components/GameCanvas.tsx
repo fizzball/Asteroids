@@ -3,10 +3,20 @@ import React, { useRef, useEffect, useState, useCallback } from 'react'
 const WIDTH = 800
 const HEIGHT = 600
 const SHIP_SIZE = 15
-const ASTEROID_SPEEDS = [1, 2, 3]
+/** Base speeds (~50% of the original [1, 2, 3]) so early play is readable. */
+const ASTEROID_BASE_SPEEDS = [0.5, 0.75, 1.0]
+/** Every SCORE_SPEED_STEP points, multiply spawn speed by +SPEED_STEP_AMOUNT (capped). */
+const SCORE_SPEED_STEP = 100
+const SPEED_STEP_AMOUNT = 0.15
+const MAX_SPEED_MULT = 2.5
 const MISSILE_SPEED = 7
 const ROTATION_SPEED = 0.1
 const MAX_MISSILES = 5
+
+function asteroidSpeedMult(score: number): number {
+  const steps = Math.floor(Math.max(0, score) / SCORE_SPEED_STEP)
+  return Math.min(MAX_SPEED_MULT, 1 + steps * SPEED_STEP_AMOUNT)
+}
 
 interface Point {
   x: number
@@ -45,13 +55,18 @@ export default function GameCanvas() {
   const [score, setScore] = useState(0)
   const [lives, setLives] = useState(3)
   const [gameOver, setGameOver] = useState(false)
-  
+  const scoreRef = useRef(0)
+
   const gameStateRef = useRef({
     ship: { x: WIDTH / 2, y: HEIGHT / 2, rotation: 0, velocity: { x: 0, y: 0 } } as Ship,
     asteroids: [] as Asteroid[],
     missiles: [] as Missile[],
     lastMissileTime: 0,
   })
+
+  useEffect(() => {
+    scoreRef.current = score
+  }, [score])
 
   const spawnAsteroid = useCallback(() => {
     const side = Math.floor(Math.random() * 4)
@@ -77,7 +92,9 @@ export default function GameCanvas() {
     }
     
     const angle = Math.atan2(HEIGHT / 2 - y, WIDTH / 2 - x)
-    const speed = ASTEROID_SPEEDS[Math.floor(Math.random() * ASTEROID_SPEEDS.length)]
+    const base =
+      ASTEROID_BASE_SPEEDS[Math.floor(Math.random() * ASTEROID_BASE_SPEEDS.length)]
+    const speed = base * asteroidSpeedMult(scoreRef.current)
     
     return {
       x,

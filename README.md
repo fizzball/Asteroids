@@ -76,6 +76,7 @@ Open your browser and navigate to `http://localhost:3000`
 - Destroy incoming asteroids by firing missiles at them
 - Each asteroid destroyed earns you 10 points
 - Avoid collisions with asteroids - you have 3 lives
+- Asteroids start slow and speed up every 100 points (capped)
 - Asteroids continuously spawn, so stay alert!
 - Try to achieve the highest score possible
 
@@ -112,7 +113,7 @@ The game uses a continuous game loop powered by `requestAnimationFrame` for smoo
 
 - **Ship rotation**: Controlled via arrow keys with smooth rotation
 - **Missile system**: Limited to 5 active missiles with cooldown
-- **Asteroid spawning**: Random spawning from screen edges, moving toward center
+- **Asteroid spawning**: Random spawning from screen edges, moving toward center; base speed ~50% of the original, ramping every 100 points up to a 2.5× cap
 - **Collision detection**: Circle-based collision between ship/asteroids and missiles/asteroids
 - **Lives system**: 3 lives with ship respawn on collision
 - **Score tracking**: 10 points per asteroid destroyed
