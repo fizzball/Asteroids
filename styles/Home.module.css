@@ -1,0 +1,121 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #000000 0%, #1a0033 100%);
+  position: relative;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.title {
+  margin: 0;
+  font-size: 2rem;
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+  letter-spacing: 4px;
+}
+
+.stats {
+  display: flex;
+  gap: 30px;
+}
+
+.stat {
+  font-size: 1.2rem;
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.canvas {
+  border: 2px solid #00ff00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  background: #000;
+}
+
+.startScreen,
+.gameOverScreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 40px 60px;
+  border: 3px solid #00ff00;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+  z-index: 100;
+}
+
+.startScreen h2,
+.gameOverScreen h2 {
+  font-size: 3rem;
+  margin: 0 0 30px 0;
+  color: #00ff00;
+  text-shadow: 0 0 15px #00ff00;
+  letter-spacing: 6px;
+}
+
+.instructions {
+  margin: 30px 0;
+  text-align: left;
+  color: #aaa;
+  font-size: 1.1rem;
+}
+
+.instructions p {
+  margin: 10px 0;
+}
+
+.instructions strong {
+  color: #00ff00;
+}
+
+.finalScore {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 20px 0;
+}
+
+.button {
+  background: transparent;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: all 0.3s;
+  margin-top: 20px;
+}
+
+.button:hover {
+  background: #00ff00;
+  color: #000;
+  box-shadow: 0 0 20px #00ff00;
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.footer {
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
